@@ -1,0 +1,55 @@
+use core::fmt;
+
+struct Player1 {}
+
+struct Player2 {}
+
+#[derive(Debug)]
+enum MoveStates {
+    X,
+    O,
+    None,
+}
+
+impl fmt::Display for MoveStates {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match *self {
+            MoveStates::X => write!(f, "X"),
+            MoveStates::O => write!(f, "O"),
+            MoveStates::None => write!(f, "None"),
+        }
+    }
+}
+
+#[derive(Debug)]
+pub struct Game {
+    board: Vec<Vec<MoveStates>>,
+}
+
+impl Game {
+    pub fn new() -> Game {
+        Game {
+            board: vec![
+                vec![MoveStates::None, MoveStates::None, MoveStates::None],
+                vec![MoveStates::None, MoveStates::None, MoveStates::None],
+                vec![MoveStates::None, MoveStates::None, MoveStates::None],
+            ],
+        }
+    }
+    // fn make_a_move(&mut self, move: ) -> Self {}
+
+    pub fn render(&self) {
+        println!(
+            "{}, {}, {}",
+            self.board[0][0], self.board[0][1], self.board[0][2]
+        );
+        println!(
+            "{}, {}, {}",
+            self.board[1][0], self.board[1][1], self.board[1][2]
+        );
+        println!(
+            "{}, {}, {}",
+            self.board[2][0], self.board[2][1], self.board[2][2]
+        );
+    }
+}
