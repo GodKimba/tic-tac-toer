@@ -11,11 +11,13 @@ fn main() -> Result<()> {
         let mov = Game::get_move()?;
 
         Game::make_a_move(&mut game, mov, player1);
+        Game::get_winner(&game);
         Game::render(&game);
 
         let mov = Game::get_move()?;
         Game::make_a_move(&mut game, mov, player2);
         Game::render(&game);
+        Game::get_winner(&game);
         rounds += 1;
     }
 
