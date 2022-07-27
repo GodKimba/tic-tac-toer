@@ -1,6 +1,6 @@
 use anyhow::{Context, Result};
 use core::fmt;
-use std::{io::stdin, string::ParseError};
+use std::io::stdin;
 
 struct Player1 {}
 
@@ -65,7 +65,6 @@ impl Game {
                 .parse::<usize>()
                 .context("Failed to parse")?,
         );
-        println!("({}, {})", user_cords1.trim(), user_cords2.trim());
         Ok(coords)
     }
 
@@ -78,7 +77,7 @@ impl Game {
         }
         self
     }
-    pub fn get_winner(&self) {
+    pub fn get_winner(&self) -> bool {
         let board = self.board.clone();
         let (cols, rows, diagonals) = Game::get_cols();
         let mut state_counter_x = 0;
@@ -98,9 +97,11 @@ impl Game {
                 MoveStates::N => state_counter_x += 0,
             }
             if state_counter_x >= 3 {
-                println!("X won")
+                println!("X won");
+                return true;
             } else if state_counter_y >= 3 {
-                println!("Y won")
+                println!("Y won");
+                return true;
             }
         }
 
@@ -120,9 +121,11 @@ impl Game {
                 MoveStates::N => state_counter_x += 0,
             }
             if state_counter_x >= 3 {
-                println!("X won")
+                println!("X won");
+                return true;
             } else if state_counter_y >= 3 {
-                println!("Y won")
+                println!("Y won");
+                return true;
             }
         }
 
@@ -142,11 +145,14 @@ impl Game {
                 MoveStates::N => state_counter_x += 0,
             }
             if state_counter_x >= 3 {
-                println!("X won")
+                println!("X won");
+                return true;
             } else if state_counter_y >= 3 {
-                println!("Y won")
+                println!("Y won");
+                return true;
             }
         }
+        return false;
     }
 
     pub fn get_cols() -> (
